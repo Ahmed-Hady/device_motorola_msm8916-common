@@ -87,16 +87,18 @@ PRODUCT_PACKAGES += \
     camera.msm8916 \
     camera.device@1.0-impl.legacy \
     libbson \
-    libshim_atomic \
     libc_util \
+    libshim_atomic \
     libshims_camera \
-    libshims_sensorlistener
+    libshims_sensorlistener \
+    Snap
 
 # Camera properties
 PRODUCT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1 \
     media.stagefright.legacyencoder=true \
     media.stagefright.less-secure=true
+
 # CMActions
 PRODUCT_PACKAGES += \
     CMActions
@@ -245,4 +247,4 @@ PRODUCT_GMS_CLIENTID_BASE := android-motorola
 
 $(call inherit-product-if-exists, vendor/motorola/msm8916-common/msm8916-common-vendor.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
+$(call inherit-product, vendor/aosp/config/common_full_phone.mk)

@@ -1,0 +1,75 @@
+diff --git a/msm8916.mk b/msm8916.mk
+index e9c792c..9f47fba 100644
+--- a/msm8916.mk
++++ b/msm8916.mk
+@@ -87,16 +87,18 @@ PRODUCT_PACKAGES += \
+     camera.msm8916 \
+     camera.device@1.0-impl.legacy \
+     libbson \
+-    libshim_atomic \
+     libc_util \
++    libshim_atomic \
+     libshims_camera \
+-    libshims_sensorlistener
++    libshims_sensorlistener \
++    Snap
+ 
+ # Camera properties
+ PRODUCT_PROPERTY_OVERRIDES += \
+     camera2.portability.force_api=1 \
+     media.stagefright.legacyencoder=true \
+     media.stagefright.less-secure=true
++
+ # CMActions
+ PRODUCT_PACKAGES += \
+     CMActions
+@@ -245,4 +247,4 @@ PRODUCT_GMS_CLIENTID_BASE := android-motorola
+ 
+ $(call inherit-product-if-exists, vendor/motorola/msm8916-common/msm8916-common-vendor.mk)
+ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+-$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
++$(call inherit-product, vendor/aosp/config/common_full_phone.mk)
+diff --git a/proprietary-files.txt b/proprietary-files.txt
+index 181b455..12807ba 100644
+--- a/proprietary-files.txt
++++ b/proprietary-files.txt
+@@ -175,9 +175,6 @@ etc/firmware/sensorhubver.txt
+ bin/stml0xx
+ lib/hw/sensorhub.msm8916.so
+ 
+-# STLport
+-vendor/lib/libstlport.so
+-
+ # Thermal
+ bin/thermal-engine
+ vendor/lib/libthermalclient.so
+diff --git a/rootdir/etc/fstab.qcom b/rootdir/etc/fstab.qcom
+index 33fd43b..90b5694 100644
+--- a/rootdir/etc/fstab.qcom
++++ b/rootdir/etc/fstab.qcom
+@@ -8,7 +8,6 @@
+ #<src>                                      <mnt_point>         <type>  <mnt_flags and options>                                              <fs_mgr_flags>
+ /dev/block/bootdevice/by-name/system         /system             ext4    ro,barrier=1                                                         wait
+ /dev/block/bootdevice/by-name/userdata       /data               f2fs    rw,nosuid,nodev,noatime,nodiratime,inline_xattr,inline_data          wait,check,formattable,encryptable=/dev/block/bootdevice/by-name/metadata
+-/dev/block/bootdevice/by-name/userdata       /data               ext4    rw,noatime,nodiratime,noauto_da_alloc,nobarrier          wait,check,formattable,encryptable=/dev/block/bootdevice/by-name/metadata
+ /dev/block/bootdevice/by-name/cache          /cache              ext4    rw,nosuid,nodev,noatime,barrier=1,data=ordered                       wait,check,formattable
+ /dev/block/bootdevice/by-name/fsg            /fsg                ext4    ro,nosuid,nodev,barrier=0                                            wait
+ /dev/block/bootdevice/by-name/modem          /firmware           ext4    ro,nosuid,nodev,barrier=0                                            wait
+diff --git a/system.prop b/system.prop
+index 0f7f2f3..5ae1dd8 100644
+--- a/system.prop
++++ b/system.prop
+@@ -31,7 +31,6 @@ ro.bluetooth.sap=true
+ 
+ # Camera
+ camera2.portability.force_api=1
+-camera.disable_treble=true
+ media.stagefright.legacyencoder=true
+ media.stagefright.less-secure=true
+ 
+@@ -90,3 +89,5 @@ rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
+ 
+ ro.use_data_netmgrd=true
+ persist.data.netmgrd.qos.enable=true
++
++camera.disable_treble=true

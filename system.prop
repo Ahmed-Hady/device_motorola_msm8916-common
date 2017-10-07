@@ -31,7 +31,6 @@ ro.bluetooth.sap=true
 
 # Camera
 camera2.portability.force_api=1
-camera.disable_treble=true
 media.stagefright.legacyencoder=true
 media.stagefright.less-secure=true
 
@@ -90,3 +89,5 @@ rild.libpath=/system/vendor/lib/libril-qc-qmi-1.so
 
 ro.use_data_netmgrd=true
 persist.data.netmgrd.qos.enable=true
+
+camera.disable_treble=true
